@@ -1,0 +1,58 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center;background-color:#303030;padding-top: 50px;padding-bottom: 50px ">
+  <h1 style="color: white;text-align: initial;font-family: cursive;padding-left: 30px">
+    {{title}}
+  </h1>
+  <h4  style="color: white;text-align: initial;font-family: cursive;padding-left: 30px">
+    {{subtitle}}
+  </h4>
+</div>
+
+<div class="example-container mat-elevation-z8">
+  <div class="example-loading-shade"
+       *ngIf="isLoadingResults || isRateLimitReached">
+    <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    <div class="example-rate-limit-reached" *ngIf="isRateLimitReached">
+      GitHub's API rate limit has been reached. It will be reset in one minute.
+    </div>
+  </div>
+
+  <div class="example-table-container" style="display: grid">
+
+    <table mat-table [dataSource]="data" class="example-table"
+           matSort matSortActive="created_at" matSortDisableClear matSortDirection="desc">
+      <!-- Number Column -->
+      <ng-container matColumnDef="created_at_i">
+        <th mat-header-cell *matHeaderCellDef>#</th>
+        <td (click)="onClick(row.story_url)" mat-cell *matCellDef="let row">{{row.created_at_i}}</td>
+      </ng-container>
+
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Title</th>
+        <td (click)="onClick(row.story_url)" mat-cell *matCellDef="let row">{{row.title}}</td>
+      </ng-container>
+
+      <!-- Created Column -->
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+          Created
+        </th>
+        <td (click)="onClick(row.story_url)" mat-cell *matCellDef="let row">{{row.created_at | date}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th > Actions </th>
+        <td (click)="onClick(row.story_url)" *matCellDef="let row" >
+          <button mat-icon-button matTooltip="Click to Delete" (click)="changeState(row.title)" class="iconbutton" color="warn">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>    
+        </td>
+    </ng-container> 
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> 
+    </table>
+  </div>
+
+  <mat-paginator [length]="resultsLength" [pageSize]="30"></mat-paginator>
+</div>

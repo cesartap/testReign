@@ -1,0 +1,13 @@
+{
+  "serverless": {
+    "project": "angularSeo",
+    "provider": "aws",
+    "skipInstall": false,
+    "directory": ".",
+    "clientProject": "angularSeo",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}
