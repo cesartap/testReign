@@ -9,7 +9,7 @@
     "express": "^4.17.1",
     "helmet": "^3.18.0",
     "mongodb": "^3.2.7",
-    "mongoose": "^5.5.15",
+    "mongoose": "^5.7.5",
     "serverless-http": "^2.0.2",
     "uuid": "^3.3.2"
   },
